@@ -6,13 +6,164 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+    <EditText
+        android:id="@+id/editTextName"
+        android:layout_width="375dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="10dp"
+        android:ems="10"
+        android:hint="@string/name"
+        android:autofillHints="no"
+        android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteY="33dp"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/editType"
+        android:layout_width="375dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="10dp"
+        android:autofillHints="no"
+        android:ems="10"
+        android:hint="@string/type"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/editTextName"
+        app:layout_constraintStart_toStartOf="@+id/editTextName"
+        app:layout_constraintTop_toBottomOf="@+id/editTextName" />
+
+    <EditText
+        android:id="@+id/editTextBrewery"
+        android:layout_width="375dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="10dp"
+        android:autofillHints="no"
+        android:ems="10"
+        android:hint="@string/brewery"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/editType"
+        app:layout_constraintStart_toStartOf="@+id/editType"
+        app:layout_constraintTop_toBottomOf="@+id/editType" />
+
+    <EditText
+        android:id="@+id/editTextAbv"
+        android:layout_width="134dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:hint="@string/abv"
+        android:autofillHints="no"
+        android:inputType="numberDecimal"
+        app:layout_constraintStart_toStartOf="@+id/editTextBrewery"
+        app:layout_constraintTop_toBottomOf="@+id/editTextBrewery" />
+
+    <EditText
+        android:id="@+id/editTextIbu"
+        android:layout_width="134dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:hint="@string/ibu"
+        android:autofillHints="no"
+        android:inputType="numberDecimal"
+        app:layout_constraintEnd_toEndOf="@+id/editTextBrewery"
+        app:layout_constraintTop_toBottomOf="@+id/editTextBrewery" />
+
+    <EditText
+        android:id="@+id/editTextNote"
+        android:layout_width="379dp"
+        android:layout_height="83dp"
+        android:layout_marginTop="10dp"
+        android:autofillHints="no"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="@string/note"
+        android:inputType="textMultiLine"
+        app:layout_constraintEnd_toEndOf="@+id/editTextIbu"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/editTextAbv"
+        app:layout_constraintTop_toBottomOf="@+id/editTextAbv" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupBuy"
+        android:layout_width="137dp"
+        android:layout_height="99dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintEnd_toEndOf="@+id/editTextAbv"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/editTextNote"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNote">
+
+        <RadioButton
+            android:id="@+id/radioButtonYes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/yes" />
+
+        <RadioButton
+            android:id="@+id/radioButtonNo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/no" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="160dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/wouldBuyAgain"
+        app:layout_constraintStart_toStartOf="@+id/editTextNote"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNote" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="205dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/opsSpinner"
+        app:layout_constraintStart_toStartOf="@+id/radioGroupBuy"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroupBuy" />
+
+    <CheckBox
+        android:id="@+id/checkBoxOrigin"
+        android:layout_width="166dp"
+        android:layout_height="49dp"
+        android:text="@string/origin"
+        app:layout_constraintEnd_toEndOf="@+id/editTextNote"
+        app:layout_constraintTop_toTopOf="@+id/radioGroupBuy"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/buttonSave"
+        android:layout_width="128dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="10dp"
+        android:onClick="saveFields"
+        android:text="@string/save"
+        app:layout_constraintEnd_toEndOf="@+id/editTextAbv"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/radioGroupBuy"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerNote" />
+
+    <Button
+        android:id="@+id/buttonClean"
+        android:layout_width="128dp"
+        android:layout_height="48dp"
+        android:onClick="clearFields"
+        android:text="@string/clean"
+        app:layout_constraintEnd_toEndOf="@+id/checkBoxOrigin"
+        app:layout_constraintTop_toTopOf="@+id/buttonSave" />
+
+    <Spinner
+        android:id="@+id/spinnerNote"
+        android:layout_width="155dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="10dp"
+        android:spinnerMode="dialog"
+        app:layout_constraintEnd_toEndOf="@+id/checkBoxOrigin"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroupBuy" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
