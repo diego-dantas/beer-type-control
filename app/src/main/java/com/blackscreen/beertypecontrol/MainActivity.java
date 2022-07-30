@@ -32,7 +32,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
         editTextName    = findViewById(R.id.editTextName);
@@ -56,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void clearFields(View view){
+
         editTextName.setText(null);
         editTextType.setText(null);
         editTextBrewery.setText(null);
@@ -131,11 +134,13 @@ public class MainActivity extends AppCompatActivity {
     public Boolean validateRadioButton(){
 
         Boolean wouldBuyAgain = null;
+        final int yes = R.id.radioButtonYes;
+        final int no = R.id.radioButtonNo;
         switch (radioGroupBuy.getCheckedRadioButtonId()){
-            case R.id.radioButtonYes:
+            case yes:
                 wouldBuyAgain = true;
                 break;
-            case R.id.radioButtonNo:
+            case no:
                 wouldBuyAgain = false;
                 break;
         }
