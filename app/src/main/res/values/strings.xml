@@ -8,7 +8,7 @@
     <string name="abv">abv</string>
     <string name="ibu">ibu</string>
     <string name="note">Observação (Faça sua análise sobre a cerveja)</string>
-    <string name="yes" >Sim</string>
+    <string name="yes">Sim</string>
     <string name="no">Não</string>
     <string name="wouldBuyAgain">Compraria novamente</string>
     <string name="origin">Nacional</string>
@@ -32,9 +32,75 @@
 
     <!-- geral msg   -->
     <string name="campos_limpos">Campos limpos</string>
-    <string name="spinnerLabel">Notas</string>
+    <string name="spinnerLabel">Nota</string>
     <string name="errorSpinner">Error ao carregar os valores do spinner</string>
     <string name="errorSpinnerSelect">Escolha uma nota de 0 a 10 para a cerveja</string>
     <string name="msg_success">Todos os dados foram validados</string>
     <!-- geral msg   -->
+
+
+    <!-- Array Beers -->
+    <string name="saison_do_mato">Saison Do Mato</string>
+    <string name="premium_lager">Premium Lagero</string>
+    <string name="el_dorado">El Dorado</string>
+    <string name="RED_IPA">RED IPA</string>
+    <string name="Amantikir">Amantikir</string>
+    <string name="cafe">Café a Toda H</string>
+    <string name="Whir">Whir</string>
+    <string name="Cortical_Algorithm">Cortical Algor</string>
+    <string name="DOUBLE_BLACK_IPA">DOUBLE BLACK IPA</string>
+    <string name="OVERCITRA_EAP">OVERCITRA EAP</string>
+    <string name="Catharia">Catharia</string>
+
+
+    <!-- Array Type -->
+    <string name="farmhouse_ale">Farmhouse Ale</string>
+    <string name="lager">Lager</string>
+    <string name="pale_ale">Pale Ale</string>
+    <string name="IPA">RED IPA</string>
+    <string name="Grape_Ale">Grape Ale</string>
+    <string name="Hard_Seltzer">Hard Seltzer</string>
+    <string name="IPA_Imperial">IPA Imperial</string>
+    <string name="IPA_Imperial2">IPA Imperial</string>
+    <string name="Double_Black">Double Black</string>
+    <string name="New_England">New England</string>
+    <string name="sour">Sour</string>
+
+    <!-- Array Abv -->
+    <string name="abv8">8</string>
+    <string name="abv5">5</string>
+    <string name="abv54">5.4</string>
+    <string name="abv57">5.7</string>
+    <string name="abv75">7.5</string>
+    <string name="abv6">6</string>
+    <string name="abv87">8.7</string>
+    <string name="abv76">7.6</string>
+    <string name="abv9">9</string>
+    <string name="abv63">6.3</string>
+    <string name="abv58">58</string>
+
+    <!-- Array Ibu -->
+    <string name="ibu35">35</string>
+    <string name="ibu14">14</string>
+    <string name="ibu32">32</string>
+    <string name="ibu70">70</string>
+    <string name="ibu10">10</string>
+    <string name="ibu16">16</string>
+    <string name="ibu50">50</string>
+    <string name="ibu40">40</string>
+    <string name="ibu71">71</string>
+    <string name="ibu36">36</string>
+    <string name="ibu47">47</string>
+
+    <!-- Array Note -->
+    <string name="note2">2</string>
+    <string name="note5">5</string>
+    <string name="note1">1</string>
+    <string name="note6">6</string>
+    <string name="note3">3</string>
+    <string name="note10">10</string>
+    <string name="note9">9</string>
+    <string name="note8">8</string>
+    <string name="note7">7</string>
+    <string name="note4">4</string>
 </resources>

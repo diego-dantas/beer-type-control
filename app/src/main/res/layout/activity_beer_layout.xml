@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.widget.LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BeerLayout">
+
+    <android.widget.LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        tools:context=".BeerLayout"
+        android:background="@drawable/customborder">
+
+        <android.widget.LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:context=".BeerLayout"
+            android:background="@drawable/customborder">
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/name" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/type" />
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/abv" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/ibu" />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/spinnerLabel" />
+
+        </android.widget.LinearLayout>
+
+        <android.widget.LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:context=".BeerLayout"
+            android:background="@drawable/customborder">
+
+            <TextView
+                android:id="@+id/textViewNameBeer"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/textViewTypeBeer"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/textViewAbvBeer"
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/textViewIbuBeer"
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/textViewNoteBeer"
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+        </android.widget.LinearLayout>
+
+    </android.widget.LinearLayout>
+
+</android.widget.LinearLayout>
