@@ -2,6 +2,8 @@ package com.blackscreen.beertypecontrol;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -38,6 +40,14 @@ public class ListActivity extends AppCompatActivity {
         listFilling();
     }
 
+    public void openAbout(View view){
+        AboutActivity.about(this);
+    }
+
+    public void openRegister(View view){
+        RegisterActivity.newBeer(this);
+    }
+
 
     private void listFilling(){
 
@@ -61,5 +71,19 @@ public class ListActivity extends AppCompatActivity {
         BeerAdapter beerAdapter = new BeerAdapter(this, beerEntities);
 
         listViewBeer.setAdapter(beerAdapter);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode,
+                                    int resultCode,
+                                    Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+
+            Toast.makeText(getApplicationContext(), " Recuperou o valor", Toast.LENGTH_LONG).show();
+
+
+        }
     }
 }

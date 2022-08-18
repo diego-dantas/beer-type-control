@@ -18,6 +18,7 @@
     <!-- button  label -->
     <string name="save">Salvar</string>
     <string name="clean">Limpar</string>
+    <string name="add">Adicionar</string>
     <!-- button  label -->
 
     <!-- error msg -->
@@ -37,6 +38,16 @@
     <string name="errorSpinnerSelect">Escolha uma nota de 0 a 10 para a cerveja</string>
     <string name="msg_success">Todos os dados foram validados</string>
     <!-- geral msg   -->
+
+
+    <!-- About -->
+    <string name="about">Sobre</string>
+    <string name="author">Autor: Diego Dantas</string>
+    <string name="course">Curso: Desenvolvimento Java Para Dispositivos Móveis</string>
+    <string name="email">E-mail: diego.dsdantas@gmail.com</string>
+    <string name="description">Aplicativo para controle de cervejas</string>
+    <string name="institution">Instituição: Universidade Tecnológica Federal do Paraná</string>
+    <!-- About -->
 
 
     <!-- Array Beers -->
@@ -103,4 +114,6 @@
     <string name="note8">8</string>
     <string name="note7">7</string>
     <string name="note4">4</string>
+    <string name="newBeer">Nova Cerveja</string>
+    <string name="updateBeer">Alterar Cerveja</string>
 </resources>

@@ -1,5 +1,7 @@
 package com.blackscreen.beertypecontrol;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -14,7 +16,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
+
+    public static final int NEW = 1;
+    public static final String OPTION = "OPTION";
+
 
     private EditText
                 editTextName,
@@ -35,7 +41,17 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_register);
+
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+
+        if(Objects.nonNull(bundle)){
+            setTitle(getString(R.string.newBeer));
+        }else{
+            setTitle(getString(R.string.updateBeer));
+        }
+
 
         editTextName    = findViewById(R.id.editTextName);
         editTextType    = findViewById(R.id.editType);
@@ -54,6 +70,15 @@ public class MainActivity extends AppCompatActivity {
 
         setUpSpinner();
 
+    }
+
+
+    public static void newBeer(AppCompatActivity activity){
+        Intent intent = new Intent(activity, RegisterActivity.class);
+
+        intent.putExtra(OPTION, NEW);
+
+        activity.startActivityForResult(intent, NEW);
     }
 
 
@@ -78,6 +103,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void saveFields(View view){
         validateAllFields();
+
+
+        Intent intent = new Intent();
+
+        setResult(Activity.RESULT_OK, intent);
+
+        finish();
     }
 
 
@@ -186,6 +218,12 @@ public class MainActivity extends AppCompatActivity {
     public void toastSpinner(String msg){
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
         spinnerNote.requestFocusFromTouch();
+    }
+
+    @Override
+    public void onBackPressed() {
+        setResult(Activity.RESULT_CANCELED);
+        finish();
     }
 
 }
