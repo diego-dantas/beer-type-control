@@ -15,14 +15,15 @@ import java.util.Objects;
 public class BeerAdapter extends BaseAdapter {
 
     private Context context;
-    private List<BeerEntity> beers;
+    private List<BeerDTO> beers;
 
-    public BeerAdapter(Context context, List<BeerEntity> beers){
+    public BeerAdapter(Context context, List<BeerDTO> beers){
         this.context = context;
         this.beers = beers;
     }
 
     private static class BeerHolder{
+        public TextView textViewId;
         public TextView textViewName;
         public TextView textViewType;
         public TextView textViewAbv;
@@ -57,6 +58,7 @@ public class BeerAdapter extends BaseAdapter {
 
             beerHolder = new BeerHolder();
 
+            beerHolder.textViewId = view.findViewById(R.id.textViewIdBeer);
             beerHolder.textViewName = view.findViewById(R.id.textViewNameBeer);
             beerHolder.textViewType = view.findViewById(R.id.textViewTypeBeer);
             beerHolder.textViewAbv = view.findViewById(R.id.textViewAbvBeer);
@@ -69,11 +71,12 @@ public class BeerAdapter extends BaseAdapter {
             beerHolder = (BeerHolder) view.getTag();
         }
 
+        beerHolder.textViewId.setText(String.valueOf(beers.get(i).getId()));
         beerHolder.textViewName.setText(beers.get(i).getName());
         beerHolder.textViewType.setText(beers.get(i).getType());
         beerHolder.textViewAbv.setText(beers.get(i).getAbv());
         beerHolder.textViewIbu.setText(beers.get(i).getIbu());
-        beerHolder.textViewNote.setText(beers.get(i).getNote());
+        beerHolder.textViewNote.setText(beers.get(i).getSpNote());
 
         return view;
     }

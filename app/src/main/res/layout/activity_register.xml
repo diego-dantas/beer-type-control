@@ -9,24 +9,40 @@
         tools:context=".RegisterActivity">
 
 
+        <EditText
+            android:id="@+id/editTextId"
+            android:layout_width="70dp"
+            android:layout_height="48dp"
+            android:autofillHints="no"
+            android:clickable="false"
+            android:cursorVisible="false"
+            android:ems="10"
+            android:enabled="false"
+            android:hint="@string/id"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toStartOf="@+id/editTextName"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints,TextContrastCheck"
+            tools:layout_editor_absoluteY="33dp" />
 
         <EditText
             android:id="@+id/editTextName"
-            android:layout_width="375dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="10dp"
+            android:layout_width="300dp"
+            android:layout_height="49dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:autofillHints="no"
             android:ems="10"
             android:hint="@string/name"
-            android:autofillHints="no"
             android:inputType="textPersonName"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="33dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/editTextId"
             tools:ignore="MissingConstraints"
-            android:layout_marginLeft="10dp" />
+            tools:layout_editor_absoluteY="32dp" />
 
         <EditText
             android:id="@+id/editType"
-            android:layout_width="375dp"
+            android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_marginTop="10dp"
             android:autofillHints="no"
@@ -34,12 +50,12 @@
             android:hint="@string/type"
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="@+id/editTextName"
-            app:layout_constraintStart_toStartOf="@+id/editTextName"
+            app:layout_constraintStart_toStartOf="@+id/editTextId"
             app:layout_constraintTop_toBottomOf="@+id/editTextName" />
 
         <EditText
             android:id="@+id/editTextBrewery"
-            android:layout_width="375dp"
+            android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_marginTop="10dp"
             android:autofillHints="no"
@@ -76,7 +92,7 @@
 
         <EditText
             android:id="@+id/editTextNote"
-            android:layout_width="379dp"
+            android:layout_width="0dp"
             android:layout_height="83dp"
             android:layout_marginTop="10dp"
             android:autofillHints="no"
@@ -87,7 +103,8 @@
             app:layout_constraintEnd_toEndOf="@+id/editTextIbu"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/editTextAbv"
-            app:layout_constraintTop_toBottomOf="@+id/editTextAbv" />
+            app:layout_constraintTop_toBottomOf="@+id/editTextAbv"
+            tools:ignore="TextContrastCheck" />
 
         <RadioGroup
             android:id="@+id/radioGroupBuy"

@@ -7,11 +7,14 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.blackscreen.beertypecontrol.beer.BeerDTO;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -19,10 +22,26 @@ import java.util.Objects;
 public class RegisterActivity extends AppCompatActivity {
 
     public static final int NEW = 1;
+    public static final int UPDATE = 2;
     public static final String OPTION = "OPTION";
+    public static final String ID = "ID";
+    public static final String NAME = "NAME";
+    public static final String TYPE = "TYPE";
+    public static final String BREWERY = "BREWERY";
+    public static final String ABV = "ABV";
+    public static final String IBU = "IBU";
+    public static final String NOTE = "NOTE";
+    public static final String SP_NOTE = "SP_NOTE";
+    public static final String BUY_AGAIN = "BUYAGAIN";
+    public static final String ORIGIN = "ORIGIN";
+
+
+    private int option;
+
 
 
     private EditText
+                editTextId,
                 editTextName,
                 editTextType,
                 editTextBrewery,
@@ -46,29 +65,59 @@ public class RegisterActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
 
-        if(Objects.nonNull(bundle)){
-            setTitle(getString(R.string.newBeer));
-        }else{
-            setTitle(getString(R.string.updateBeer));
-        }
-
-
+        editTextId      = findViewById(R.id.editTextId);
         editTextName    = findViewById(R.id.editTextName);
         editTextType    = findViewById(R.id.editType);
         editTextBrewery = findViewById(R.id.editTextBrewery);
         editTextAbv     = findViewById(R.id.editTextAbv);
         editTextIbu     = findViewById(R.id.editTextIbu);
         editTextNote    = findViewById(R.id.editTextNote);
-
-        checkBoxOrigin = findViewById(R.id.checkBoxOrigin);
-
-        radioGroupBuy = findViewById(R.id.radioGroupBuy);
-
-        spinnerNote = findViewById(R.id.spinnerNote);
-
-        editTextName.requestFocus();
+        checkBoxOrigin  = findViewById(R.id.checkBoxOrigin);
+        radioGroupBuy   = findViewById(R.id.radioGroupBuy);
+        spinnerNote     = findViewById(R.id.spinnerNote);
 
         setUpSpinner();
+
+        if(Objects.nonNull(bundle)){
+
+            option = bundle.getInt(OPTION, NEW);
+
+            if(option == NEW){
+                editTextId.setText("0");
+                setTitle(getString(R.string.newBeer));
+            }else{
+
+                BeerDTO beerDTO = BeerDTO.bundleToBeerDTO(bundle);
+
+                editTextId.setText(String.valueOf(beerDTO.getId()));
+                editTextName.setText(beerDTO.getName());
+                editTextType.setText(beerDTO.getType());
+                editTextBrewery.setText(beerDTO.getBrewery());
+                editTextAbv.setText(beerDTO.getAbv());
+                editTextIbu.setText(beerDTO.getIbu());
+                editTextNote.setText(beerDTO.getNote());
+
+                RadioButton rbBuyAgain;
+                if(beerDTO.isWouldBuyAgain()){
+                    rbBuyAgain = findViewById(R.id.radioButtonYes);
+                    rbBuyAgain.setChecked(true);
+                }else{
+                    rbBuyAgain = findViewById(R.id.radioButtonNo);
+                    rbBuyAgain.setChecked(true);
+                }
+
+                checkBoxOrigin.setChecked(beerDTO.isOrigin());
+
+                int position = Integer.valueOf(beerDTO.getSpNote()) + 1;
+
+                spinnerNote.setSelection(position);
+
+                setTitle(getString(R.string.updateBeer));
+            }
+
+        }
+
+        editTextName.requestFocus();
 
     }
 
@@ -81,6 +130,23 @@ public class RegisterActivity extends AppCompatActivity {
         activity.startActivityForResult(intent, NEW);
     }
 
+    public static void updateBeer(AppCompatActivity activity, BeerDTO beerListView){
+        Intent intent = new Intent(activity, RegisterActivity.class);
+
+        intent.putExtra(OPTION, UPDATE);
+        intent.putExtra(ID, beerListView.getId());
+        intent.putExtra(NAME, beerListView.getName());
+        intent.putExtra(TYPE, beerListView.getType());
+        intent.putExtra(BREWERY, beerListView.getBrewery());
+        intent.putExtra(ABV, beerListView.getAbv());
+        intent.putExtra(IBU, beerListView.getIbu());
+        intent.putExtra(NOTE, beerListView.getNote());
+        intent.putExtra(SP_NOTE, beerListView.getSpNote());
+        intent.putExtra(BUY_AGAIN, beerListView.isWouldBuyAgain());
+        intent.putExtra(ORIGIN, beerListView.isOrigin());
+
+        activity.startActivityForResult(intent, UPDATE);
+    }
 
     public void clearFields(View view){
 
@@ -102,54 +168,71 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void saveFields(View view){
-        validateAllFields();
+        BeerDTO beerDTO = validateAllFields();
 
+        if(Objects.nonNull(beerDTO)){
 
-        Intent intent = new Intent();
+            Intent intent = new Intent();
 
-        setResult(Activity.RESULT_OK, intent);
+            intent.putExtra(ID, beerDTO.getId());
+            intent.putExtra(NAME, beerDTO.getName());
+            intent.putExtra(TYPE, beerDTO.getType());
+            intent.putExtra(BREWERY, beerDTO.getBrewery());
+            intent.putExtra(ABV, beerDTO.getAbv());
+            intent.putExtra(IBU, beerDTO.getIbu());
+            intent.putExtra(NOTE, beerDTO.getNote());
+            intent.putExtra(SP_NOTE, beerDTO.getSpNote());
+            intent.putExtra(BUY_AGAIN, beerDTO.isWouldBuyAgain());
+            intent.putExtra(ORIGIN, beerDTO.isOrigin());
 
-        finish();
+            setResult(Activity.RESULT_OK, intent);
+
+            finish();
+        }
     }
 
+    public BeerDTO validateAllFields(){
 
-
-    public void validateAllFields(){
+        int id          = Integer.valueOf(editTextId.getText().toString());
         String name     = editTextName.getText().toString();
         String type     = editTextType.getText().toString();
         String brewery  = editTextBrewery.getText().toString();
         String abv      = editTextAbv.getText().toString();
         String ibu      = editTextIbu.getText().toString();
         String note     = editTextNote.getText().toString();
+        String spNote   = validateSpinner();
+        Boolean wouldBuyAgain = validateRadioButton();
 
         if(validateField(name)){
             showToastEditText(R.string.errorName, editTextName);
-            return;
+            return null;
         }else if(validateField(type)){
             showToastEditText(R.string.errorType, editTextType);
-            return;
+            return null;
         }else if(validateField(brewery)){
             showToastEditText(R.string.errorbrewery, editTextBrewery);
-            return;
+            return null;
         }else if(validateField(abv)){
             showToastEditText(R.string.errorAbv, editTextAbv);
-            return;
+            return null;
         }else if(validateField(ibu)){
             showToastEditText(R.string.errorIbu, editTextIbu);
-            return;
+            return null;
         }else if(validateField(note)){
             showToastEditText(R.string.errorNote, editTextNote);
-            return;
+            return null;
         }
 
-        if(Objects.isNull(validateRadioButton()))
-            return;
+        if(Objects.isNull(wouldBuyAgain) || Objects.isNull(spNote)){
+            return null;
+        }
 
-        if(Objects.isNull(validateSpinner()))
-            return;
-
+        boolean origin = checkBoxOrigin.isChecked();
 
         Toast.makeText(this, R.string.msg_success, Toast.LENGTH_LONG).show();
+        BeerDTO beerDTO = new BeerDTO(id, name, type, brewery, abv, ibu, note, spNote, wouldBuyAgain, origin);
+
+        return beerDTO;
 
     }
 

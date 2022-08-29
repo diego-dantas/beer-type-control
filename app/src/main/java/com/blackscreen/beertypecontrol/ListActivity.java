@@ -7,18 +7,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.blackscreen.beertypecontrol.beer.BeerAdapter;
-import com.blackscreen.beertypecontrol.beer.BeerEntity;
+import com.blackscreen.beertypecontrol.beer.BeerDTO;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ListActivity extends AppCompatActivity {
 
     private ListView listViewBeer;
+    private BeerAdapter beerAdapter;
+    private List<BeerDTO> beerList;
+    private int positionSelected = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,9 +32,9 @@ public class ListActivity extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                BeerEntity beer = (BeerEntity) listViewBeer.getItemAtPosition(i);
 
-                Toast.makeText(getApplicationContext(), beer.getName() + " Foi Clicado", Toast.LENGTH_SHORT).show();
+                positionSelected = i;
+                updateRegister();
 
             }
         });
@@ -48,27 +50,19 @@ public class ListActivity extends AppCompatActivity {
         RegisterActivity.newBeer(this);
     }
 
+    public void updateRegister() {
+
+        BeerDTO beerListView = beerList.get(positionSelected);
+
+        RegisterActivity.updateBeer(this, beerListView);
+    }
+
 
     private void listFilling(){
 
-        String[] beers = getResources().getStringArray(R.array.beers);
-        String[] types = getResources().getStringArray(R.array.types);
-        String[] abv = getResources().getStringArray(R.array.abvs);
-        String[] ibu = getResources().getStringArray(R.array.ibus);
-        String[] note = getResources().getStringArray(R.array.notes);
+        beerList = new ArrayList<>();
 
-        ArrayList<BeerEntity> beerEntities = new ArrayList<>();
-
-        for(int i = 0; i < beers.length; i++){
-            beerEntities.add(new BeerEntity(
-                    beers[i],
-                    types[i],
-                    abv[i],
-                    ibu[i],
-                    note[i]));
-        }
-
-        BeerAdapter beerAdapter = new BeerAdapter(this, beerEntities);
+        beerAdapter = new BeerAdapter(this, beerList);
 
         listViewBeer.setAdapter(beerAdapter);
     }
@@ -81,9 +75,37 @@ public class ListActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
 
-            Toast.makeText(getApplicationContext(), " Recuperou o valor", Toast.LENGTH_LONG).show();
+            Bundle bundle = data.getExtras();
 
+            if(requestCode == RegisterActivity.UPDATE){
 
+                BeerDTO beerListView = beerList.get(positionSelected);
+                beerListView.setId(bundle.getInt(RegisterActivity.ID));
+                beerListView.setName(bundle.getString(RegisterActivity.NAME));
+                beerListView.setType(bundle.getString(RegisterActivity.TYPE));
+                beerListView.setBrewery(bundle.getString(RegisterActivity.BREWERY));
+                beerListView.setAbv(bundle.getString(RegisterActivity.ABV));
+                beerListView.setIbu(bundle.getString(RegisterActivity.IBU));
+                beerListView.setNote(bundle.getString(RegisterActivity.NOTE));
+                beerListView.setSpNote(bundle.getString(RegisterActivity.SP_NOTE));
+                beerListView.setWouldBuyAgain(bundle.getBoolean(RegisterActivity.BUY_AGAIN));
+                beerListView.setOrigin(bundle.getBoolean(RegisterActivity.ORIGIN));
+
+                positionSelected = -1;
+
+            }else{
+
+                Integer id = idGenerator();
+                bundle.putInt(RegisterActivity.ID, id);
+
+                beerList.add(BeerDTO.bundleToBeerDTO(bundle));
+            }
+            beerAdapter.notifyDataSetChanged();
         }
     }
+
+    public int idGenerator(){
+        return beerList.size() + 1;
+    }
+
 }
