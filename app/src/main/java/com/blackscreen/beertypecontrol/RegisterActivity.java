@@ -3,6 +3,8 @@ package com.blackscreen.beertypecontrol;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
@@ -12,6 +14,7 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.blackscreen.beertypecontrol.beer.BeerDTO;
@@ -149,7 +152,10 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void clearFields(View view){
+        clean();
+    }
 
+    private void clean(){
         editTextName.setText(null);
         editTextType.setText(null);
         editTextBrewery.setText(null);
@@ -167,7 +173,12 @@ public class RegisterActivity extends AppCompatActivity {
         Toast.makeText(this, R.string.campos_limpos, Toast.LENGTH_LONG).show();
     }
 
+
     public void saveFields(View view){
+       toSave();
+    }
+
+    private void toSave(){
         BeerDTO beerDTO = validateAllFields();
 
         if(Objects.nonNull(beerDTO)){
@@ -191,7 +202,9 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
-    public BeerDTO validateAllFields(){
+
+
+    private BeerDTO validateAllFields(){
 
         int id          = Integer.valueOf(editTextId.getText().toString());
         String name     = editTextName.getText().toString();
@@ -309,4 +322,24 @@ public class RegisterActivity extends AppCompatActivity {
         finish();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_option_register, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menuItemSave:
+                toSave();
+                return true;
+            case R.id.menuItemClean:
+                clean();
+                return true;
+            default:
+                return false;
+        }
+
+    }
 }

@@ -20,6 +20,8 @@
     <string name="save">Salvar</string>
     <string name="clean">Limpar</string>
     <string name="add">Adicionar</string>
+    <string name="edit">Editar</string>
+    <string name="delete">Excluir</string>
     <!-- button  label -->
 
     <!-- error msg -->
