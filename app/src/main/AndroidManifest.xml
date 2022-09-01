@@ -16,6 +16,7 @@
         tools:targetApi="32">
         <activity
             android:name=".AboutActivity"
+            android:parentActivityName=".ListActivity"
             android:exported="false" />
         <activity
             android:name=".BeerLayout"
@@ -31,6 +32,7 @@
         </activity>
         <activity
             android:name=".RegisterActivity"
+            android:parentActivityName=".ListActivity"
             android:exported="true" />
     </application>
 

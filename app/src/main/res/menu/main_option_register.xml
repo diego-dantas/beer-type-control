@@ -9,7 +9,7 @@
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/menuItemClean"
-        android:icon="@android:drawable/ic_menu_close_clear_cancel"
+        android:icon="@drawable/icon_clean"
         android:title="@string/clean"
         app:showAsAction="ifRoom" />
 </menu>

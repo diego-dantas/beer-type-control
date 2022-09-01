@@ -15,6 +15,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.blackscreen.beertypecontrol.beer.BeerDTO;
@@ -64,6 +65,11 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_register);
+
+        ActionBar actionBar = getSupportActionBar();
+        if(Objects.nonNull(actionBar)){
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
@@ -213,8 +219,7 @@ public class RegisterActivity extends AppCompatActivity {
         String abv      = editTextAbv.getText().toString();
         String ibu      = editTextIbu.getText().toString();
         String note     = editTextNote.getText().toString();
-        String spNote   = validateSpinner();
-        Boolean wouldBuyAgain = validateRadioButton();
+
 
         if(validateField(name)){
             showToastEditText(R.string.errorName, editTextName);
@@ -235,6 +240,9 @@ public class RegisterActivity extends AppCompatActivity {
             showToastEditText(R.string.errorNote, editTextNote);
             return null;
         }
+
+        String spNote   = validateSpinner();
+        Boolean wouldBuyAgain = validateRadioButton();
 
         if(Objects.isNull(wouldBuyAgain) || Objects.isNull(spNote)){
             return null;
@@ -318,6 +326,10 @@ public class RegisterActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+       cancel();
+    }
+
+    private void cancel(){
         setResult(Activity.RESULT_CANCELED);
         finish();
     }
@@ -337,9 +349,11 @@ public class RegisterActivity extends AppCompatActivity {
             case R.id.menuItemClean:
                 clean();
                 return true;
+            case android.R.id.home:
+                cancel();
+                return true;
             default:
-                return false;
+                return super.onOptionsItemSelected(item);
         }
-
     }
 }
