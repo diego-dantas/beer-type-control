@@ -1,12 +1,19 @@
 package com.blackscreen.beertypecontrol;
 
+import static com.blackscreen.beertypecontrol.useful.ViewTypeOrder.*;
+
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ActionMode;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,14 +21,26 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.blackscreen.beertypecontrol.beer.BeerAdapter;
+import com.blackscreen.beertypecontrol.beer.BeerComparator;
 import com.blackscreen.beertypecontrol.beer.BeerDTO;
+import com.blackscreen.beertypecontrol.useful.ViewOrder;
+import com.blackscreen.beertypecontrol.useful.ViewTypeOrder;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class ListActivity extends AppCompatActivity {
+
+    private static final String ARQUIVO = "com.blackscreen.beertypecontrol.ORDER_PREFERENCE";
+
+    private static final String PREFERENCE = "PREFERENCE";
+
+    private ViewTypeOrder viewTypeOrderOption = ID;
 
     private ListView listViewBeer;
     private BeerAdapter beerAdapter;
@@ -73,10 +92,14 @@ public class ListActivity extends AppCompatActivity {
         }
     };
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_list);
+
         listViewBeer = findViewById(R.id.listViewBeer);
 
         listViewBeer.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -115,6 +138,7 @@ public class ListActivity extends AppCompatActivity {
         });
 
         listFilling();
+        readOrderPreference();
     }
 
     @Override
@@ -125,6 +149,8 @@ public class ListActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        item.setChecked(true);
+
         switch (item.getItemId()){
             case R.id.menuItemAdd:
                 RegisterActivity.newBeer(this);
@@ -132,20 +158,19 @@ public class ListActivity extends AppCompatActivity {
             case R.id.menuItemAbout:
                 AboutActivity.about(this);
                 break;
+            case R.id.gMenuItemOrderId:
+                saveOrderPreference(ID);
+                return true;
+
+            case R.id.gMenuItemOrderName:
+                saveOrderPreference(NAME);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
 
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void openAbout(View view){
-        AboutActivity.about(this);
-    }
-
-    public void openRegister(View view){
-        RegisterActivity.newBeer(this);
     }
 
     public void updateRegister() {
@@ -163,12 +188,14 @@ public class ListActivity extends AppCompatActivity {
         beerAdapter = new BeerAdapter(this, beerList);
 
         listViewBeer.setAdapter(beerAdapter);
+
     }
 
     private void deleteRegister(){
         beerList.remove(positionSelected);
         beerAdapter.notifyDataSetChanged();
     }
+
 
     @Override
     protected void onActivityResult(int requestCode,
@@ -203,15 +230,66 @@ public class ListActivity extends AppCompatActivity {
 
                 beerList.add(BeerDTO.bundleToBeerDTO(bundle));
             }
-            beerAdapter.notifyDataSetChanged();
+
+            updateOrderList();
         }
     }
 
-    public int idGenerator(){
+
+    private int idGenerator(){
         return beerList.size() + 1;
     }
 
+    private void readOrderPreference(){
 
+        SharedPreferences shared = getSharedPreferences(ARQUIVO,
+                Context.MODE_PRIVATE);
 
+        viewTypeOrderOption = ViewTypeOrder.valueOf(shared.getString(PREFERENCE, viewTypeOrderOption.toString()));
+
+        updateOrderList();
+    }
+
+    private void saveOrderPreference(ViewTypeOrder viewTypeOrder){
+
+        SharedPreferences shared = getSharedPreferences(ARQUIVO,
+                Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = shared.edit();
+
+        editor.putString(PREFERENCE, viewTypeOrder.toString());
+
+        editor.commit();
+
+        viewTypeOrderOption = viewTypeOrder;
+
+        updateOrderList();
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+
+        MenuItem item;
+
+        switch(viewTypeOrderOption){
+
+            case ID:
+                item = menu.findItem(R.id.gMenuItemOrderId);
+                break;
+            case NAME:
+                item = menu.findItem(R.id.gMenuItemOrderName);
+                break;
+            default:
+                return false;
+        }
+
+        item.setChecked(true);
+        return true;
+    }
+
+    private void updateOrderList(){
+        Collections.sort(beerList, new BeerComparator(ViewOrder.ASC, viewTypeOrderOption));
+        beerAdapter.notifyDataSetChanged();
+    }
 
 }

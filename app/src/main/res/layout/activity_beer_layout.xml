@@ -22,11 +22,12 @@
             tools:context=".BeerLayout">
 
             <TextView
-                android:id="@+id/textView13"
+                android:id="@+id/textViewListId"
                 android:layout_width="10dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/id" />
+                android:text="@string/id"
+                android:textColor="#121111" />
 
             <TextView
                 android:id="@+id/textView5"

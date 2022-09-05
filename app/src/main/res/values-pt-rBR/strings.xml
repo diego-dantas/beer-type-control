@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Controle de tipo de cerveja</string>
+
+    <!-- label    -->
+    <string name="id">id</string>
+    <string name="name">Nome</string>
+    <string name="type">Tipo</string>
+    <string name="brewery">Cervejaria</string>
+    <string name="abv">abv</string>
+    <string name="ibu">ibu</string>
+    <string name="note">Observação (Faça sua análise sobre a cerveja)</string>
+    <string name="yes">Sim</string>
+    <string name="no">Não</string>
+    <string name="wouldBuyAgain">Compraria novamente</string>
+    <string name="origin">Nacional</string>
+    <string name="opsSpinner">Escolha a nota para a cerveja:</string>
+    <!-- label -->
+
+    <!-- button  label -->
+    <string name="save">Salvar</string>
+    <string name="clean">Limpar</string>
+    <string name="add">Adicionar</string>
+    <string name="edit">Editar</string>
+    <string name="delete">Excluir</string>
+    <!-- button  label -->
+
+    <!-- error msg -->
+    <string name="errorName">O nome da cerveja não pode ser vazio</string>
+    <string name="errorType">O tipo da cerveja não pode ser vazio</string>
+    <string name="errorbrewery">A Cervejaria não pode ser vazio</string>
+    <string name="errorAbv">O Abv da cerveja não pode ser vazio</string>
+    <string name="errorIbu">O ibu da cerveja não pode ser vazio</string>
+    <string name="errorNote">O campo de observação não pode ser vazio</string>
+    <string name="errorRadioGroupBuy">Escolha uma opção</string>
+    <!-- error msg -->
+
+    <!-- geral msg   -->
+    <string name="campos_limpos">Campos limpos</string>
+    <string name="spinnerLabel">Nota</string>
+    <string name="errorSpinner">Error ao carregar os valores do spinner</string>
+    <string name="errorSpinnerSelect">Escolha uma nota de 0 a 10 para a cerveja</string>
+    <string name="msg_success">Todos os dados foram validados</string>
+    <!-- geral msg   -->
+
+
+    <!-- About -->
+    <string name="about">Sobre</string>
+    <string name="author">Autor: Diego Dantas</string>
+    <string name="course">Curso: Desenvolvimento Java Para Dispositivos Móveis</string>
+    <string name="email">E-mail: diego.dsdantas@gmail.com</string>
+    <string name="description">Aplicativo para controle de cervejas</string>
+    <string name="institution">Instituição: Universidade Tecnológica Federal do Paraná</string>
+    <!-- About -->
+
+    <string name="newBeer">Nova Cerveja</string>
+    <string name="updateBeer">Alterar Cerveja</string>
+</resources>

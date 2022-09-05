@@ -1,6 +1,7 @@
 package com.blackscreen.beertypecontrol.beer;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.blackscreen.beertypecontrol.R;
+import com.blackscreen.beertypecontrol.useful.ViewMode;
 
 import java.util.List;
 import java.util.Objects;
@@ -16,6 +18,7 @@ public class BeerAdapter extends BaseAdapter {
 
     private Context context;
     private List<BeerDTO> beers;
+    private int colorMode;
 
     public BeerAdapter(Context context, List<BeerDTO> beers){
         this.context = context;
@@ -80,4 +83,5 @@ public class BeerAdapter extends BaseAdapter {
 
         return view;
     }
+
 }

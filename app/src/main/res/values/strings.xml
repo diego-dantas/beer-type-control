@@ -3,55 +3,55 @@
 
     <!-- label    -->
     <string name="id">id</string>
-    <string name="name">Nome</string>
-    <string name="type">Tipo</string>
-    <string name="brewery">Cervejaria</string>
+    <string name="name">Name</string>
+    <string name="type">Type</string>
+    <string name="brewery">Brewery</string>
     <string name="abv">abv</string>
     <string name="ibu">ibu</string>
-    <string name="note">Observação (Faça sua análise sobre a cerveja)</string>
-    <string name="yes">Sim</string>
-    <string name="no">Não</string>
-    <string name="wouldBuyAgain">Compraria novamente</string>
-    <string name="origin">Nacional</string>
-    <string name="opsSpinner">Escolha a nota para a cerveja:</string>
+    <string name="note">Observation (Do your analysis on the beer)</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="wouldBuyAgain">Would buy again</string>
+    <string name="origin">National</string>
+    <string name="opsSpinner">"Choose the note for the beer: "</string>
     <!-- label -->
 
     <!-- button  label -->
-    <string name="save">Salvar</string>
-    <string name="clean">Limpar</string>
-    <string name="add">Adicionar</string>
-    <string name="edit">Editar</string>
-    <string name="delete">Excluir</string>
+    <string name="save">To save</string>
+    <string name="clean">Clean</string>
+    <string name="add">Add</string>
+    <string name="edit">To edit</string>
+    <string name="delete">Delete</string>
     <!-- button  label -->
 
     <!-- error msg -->
-    <string name="errorName">O nome da cerveja não pode ser vazio</string>
-    <string name="errorType">O tipo da cerveja não pode ser vazio</string>
-    <string name="errorbrewery">A Cervejaria não pode ser vazio</string>
-    <string name="errorAbv">O Abv da cerveja não pode ser vazio</string>
-    <string name="errorIbu">O ibu da cerveja não pode ser vazio</string>
-    <string name="errorNote">O campo de observação não pode ser vazio</string>
-    <string name="errorRadioGroupBuy">Escolha uma opção</string>
+    <string name="errorName">"The beer name cannot be empty "</string>
+    <string name="errorType">The beer type cannot be empty</string>
+    <string name="errorbrewery">"The Brewery cannot be empty "</string>
+    <string name="errorAbv">"Beer Abv cannot be empty "</string>
+    <string name="errorIbu">"The beer ibu can't be empty "</string>
+    <string name="errorNote">"The observation field cannot be empty "</string>
+    <string name="errorRadioGroupBuy">"Choose an option "</string>
     <!-- error msg -->
 
     <!-- geral msg   -->
-    <string name="campos_limpos">Campos limpos</string>
-    <string name="spinnerLabel">Nota</string>
-    <string name="errorSpinner">Error ao carregar os valores do spinner</string>
-    <string name="errorSpinnerSelect">Escolha uma nota de 0 a 10 para a cerveja</string>
-    <string name="msg_success">Todos os dados foram validados</string>
+    <string name="campos_limpos">Clean fields</string>
+    <string name="spinnerLabel">Note</string>
+    <string name="errorSpinner">"Error loading spinner values "</string>
+    <string name="errorSpinnerSelect">"Choose a grade from 0 to 10 for the beer "</string>
+    <string name="msg_success">"All data has been validated "</string>
     <!-- geral msg   -->
 
 
     <!-- About -->
-    <string name="about">Sobre</string>
-    <string name="author">Autor: Diego Dantas</string>
-    <string name="course">Curso: Desenvolvimento Java Para Dispositivos Móveis</string>
+    <string name="about">About</string>
+    <string name="author">Author: Diego Dantas</string>
+    <string name="course">"Course: Java Development for Mobile Devices "</string>
     <string name="email">E-mail: diego.dsdantas@gmail.com</string>
-    <string name="description">Aplicativo para controle de cervejas</string>
-    <string name="institution">Instituição: Universidade Tecnológica Federal do Paraná</string>
+    <string name="description">Beer control app</string>
+    <string name="institution">Institution: Federal Technological University of Paraná</string>
     <!-- About -->
 
-    <string name="newBeer">Nova Cerveja</string>
-    <string name="updateBeer">Alterar Cerveja</string>
+    <string name="newBeer">"New Beer "</string>
+    <string name="updateBeer">Update Beer</string>
 </resources>
