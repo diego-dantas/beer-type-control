@@ -41,6 +41,8 @@
     <string name="errorSpinner">Error ao carregar os valores do spinner</string>
     <string name="errorSpinnerSelect">Escolha uma nota de 0 a 10 para a cerveja</string>
     <string name="msg_success">Todos os dados foram validados</string>
+    <string name="msg_delete">"Deseja excluir a cerveja? \n"</string>
+
     <!-- geral msg   -->
 
 
@@ -57,4 +59,6 @@
     <string name="updateBeer">Alterar Cerveja</string>
     <string name="ordination">Ordenação</string>
     <string name="direction">Direção</string>
+    <string name="warning">Aviso</string>
+    <string name="confirmation">Confirmação</string>
 </resources>

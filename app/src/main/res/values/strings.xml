@@ -14,6 +14,7 @@
     <string name="wouldBuyAgain">Would buy again</string>
     <string name="origin">National</string>
     <string name="opsSpinner">"Choose the note for the beer: "</string>
+    <string name="ok" translatable="false">Ok</string>
     <!-- label -->
 
     <!-- button  label -->
@@ -58,4 +59,8 @@
     <string name="direction">Direction</string>
     <string name="asc" translatable="false">ASC</string>
     <string name="desc" translatable="false">DESC</string>
+    <string name="warning">Warning</string>
+    <string name="confirmation">Confirmation</string>
+    <string name="msg_delete">"Do you want to delete the beer? \n"</string>
+    <string name="table_name">beer</string>
 </resources>

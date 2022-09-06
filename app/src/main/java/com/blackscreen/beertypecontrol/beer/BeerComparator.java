@@ -5,7 +5,7 @@ import com.blackscreen.beertypecontrol.useful.ViewTypeOrder;
 
 import java.util.Comparator;
 
-public class BeerComparator implements Comparator<BeerDTO>  {
+public class BeerComparator implements Comparator<Beer>  {
 
     private ViewDirection viewDirection;
     private ViewTypeOrder viewTypeOrder;
@@ -16,18 +16,20 @@ public class BeerComparator implements Comparator<BeerDTO>  {
     }
 
     @Override
-    public int compare(BeerDTO beerDTO1, BeerDTO beerDTO2) {
-
+    public int compare(Beer beer1, Beer beer2) {
+        long compareLong;
         if(ViewTypeOrder.ID.equals(this.viewTypeOrder)){
-            return ViewDirection.ASC.equals(this.viewDirection) ?
-                    beerDTO1.getId() - beerDTO2.getId() :
-                    beerDTO2.getId() - beerDTO1.getId();
+            compareLong =  ViewDirection.ASC.equals(this.viewDirection) ?
+                    beer1.getId() - beer2.getId() :
+                    beer2.getId() - beer1.getId();
+
+            return (int) compareLong;
         }
 
         if(ViewTypeOrder.NAME.equals(this.viewTypeOrder)){
             return ViewDirection.ASC.equals(this.viewDirection) ?
-                    beerDTO1.getName().toUpperCase().compareTo(beerDTO2.getName().toUpperCase()) :
-                    beerDTO2.getName().toUpperCase().compareTo(beerDTO1.getName().toUpperCase());
+                    beer1.getName().toUpperCase().compareTo(beer2.getName().toUpperCase()) :
+                    beer2.getName().toUpperCase().compareTo(beer1.getName().toUpperCase());
         }
 
         return -1;

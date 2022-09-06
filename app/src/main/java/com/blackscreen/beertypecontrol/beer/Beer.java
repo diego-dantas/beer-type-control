@@ -2,11 +2,16 @@ package com.blackscreen.beertypecontrol.beer;
 
 import android.os.Bundle;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import com.blackscreen.beertypecontrol.RegisterActivity;
 
-public class BeerDTO {
+@Entity
+public class Beer {
 
-    private int id;
+    @PrimaryKey(autoGenerate = true)
+    private long id;
     private String name;
     private String type;
     private String brewery;
@@ -18,7 +23,7 @@ public class BeerDTO {
     private boolean wouldBuyAgain;
 
 
-    public BeerDTO(int id, String name, String type, String brewery, String abv, String ibu, String note, String spNote, boolean wouldBuyAgain, boolean origin) {
+    public Beer(long id, String name, String type, String brewery, String abv, String ibu, String note, String spNote, boolean wouldBuyAgain, boolean origin) {
         this.id = id;
         this.name = name;
         this.type = type;
@@ -31,7 +36,12 @@ public class BeerDTO {
         this.origin = origin;
     }
 
-    public BeerDTO() {
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -82,14 +92,6 @@ public class BeerDTO {
         this.brewery = brewery;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getNote() {
         return note;
     }
@@ -114,10 +116,10 @@ public class BeerDTO {
         this.wouldBuyAgain = wouldBuyAgain;
     }
 
-    public static BeerDTO bundleToBeerDTO(Bundle bundle){
+    public static Beer bundleToBeerDTO(Bundle bundle){
 
-        return new BeerDTO(
-                bundle.getInt(RegisterActivity.ID),
+        return new Beer(
+                bundle.getLong(RegisterActivity.ID),
                 bundle.getString(RegisterActivity.NAME),
                 bundle.getString(RegisterActivity.TYPE),
                 bundle.getString(RegisterActivity.BREWERY),

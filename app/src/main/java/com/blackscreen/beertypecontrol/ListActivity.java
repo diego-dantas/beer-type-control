@@ -9,6 +9,7 @@ import androidx.appcompat.view.ActionMode;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -22,7 +23,9 @@ import android.widget.ListView;
 
 import com.blackscreen.beertypecontrol.beer.BeerAdapter;
 import com.blackscreen.beertypecontrol.beer.BeerComparator;
-import com.blackscreen.beertypecontrol.beer.BeerDTO;
+import com.blackscreen.beertypecontrol.beer.Beer;
+import com.blackscreen.beertypecontrol.beer.BeerDatabase;
+import com.blackscreen.beertypecontrol.useful.CustomAlert;
 import com.blackscreen.beertypecontrol.useful.ViewDirection;
 import com.blackscreen.beertypecontrol.useful.ViewTypeOrder;
 
@@ -42,7 +45,7 @@ public class ListActivity extends AppCompatActivity {
 
     private ListView listViewBeer;
     private BeerAdapter beerAdapter;
-    private List<BeerDTO> beerList;
+    private List<Beer> beerList;
     private int positionSelected = -1;
 
     private ActionMode actionMode;
@@ -100,16 +103,16 @@ public class ListActivity extends AppCompatActivity {
 
         listViewBeer = findViewById(R.id.listViewBeer);
 
-        listViewBeer.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                positionSelected = i;
-                updateRegister();
-
-            }
-        });
+//        listViewBeer.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//
+//                positionSelected = i;
+//                updateRegister();
+//
+//            }
+//        });
 
         listViewBeer.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
@@ -136,7 +139,6 @@ public class ListActivity extends AppCompatActivity {
         });
 
         listFilling();
-        readOrderPreference();
     }
 
     @Override
@@ -183,7 +185,7 @@ public class ListActivity extends AppCompatActivity {
 
     public void updateRegister() {
 
-        BeerDTO beerListView = beerList.get(positionSelected);
+        Beer beerListView = beerList.get(positionSelected);
 
         RegisterActivity.updateBeer(this, beerListView);
     }
@@ -191,17 +193,52 @@ public class ListActivity extends AppCompatActivity {
 
     private void listFilling(){
 
-        beerList = new ArrayList<>();
+        BeerDatabase beerDatabase = BeerDatabase.getDatabase(this);
+
+        beerList = beerDatabase.beerDAO().findAll();
 
         beerAdapter = new BeerAdapter(this, beerList);
 
         listViewBeer.setAdapter(beerAdapter);
 
+        readOrderPreference();
+
     }
 
     private void deleteRegister(){
-        beerList.remove(positionSelected);
-        beerAdapter.notifyDataSetChanged();
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(getString(R.string.msg_delete));
+        stringBuilder.append(beerList.get(positionSelected).getName());
+
+        BeerDatabase beerDatabase = BeerDatabase.getDatabase(this);
+
+        DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int option) {
+
+                switch(option){
+                    case DialogInterface.BUTTON_POSITIVE:
+
+                        Beer beer = beerList.get(positionSelected);
+
+                        beerDatabase.beerDAO().delete(beer);
+
+                        beerList.remove(beer);
+                        beerAdapter.notifyDataSetChanged();
+                        break;
+
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        break;
+                }
+            }
+        };
+
+        CustomAlert.actionConfirmation(
+                this,
+                stringBuilder.toString(),
+                listener);
+
     }
 
 
@@ -213,40 +250,34 @@ public class ListActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
 
-            Bundle bundle = data.getExtras();
+//            Bundle bundle = data.getExtras();
+//
+//            if(requestCode == RegisterActivity.UPDATE){
+//
+//                Beer beerListView = beerList.get(positionSelected);
+//
+//                beerListView.setId(bundle.getLong(RegisterActivity.ID));
+//                beerListView.setName(bundle.getString(RegisterActivity.NAME));
+//                beerListView.setType(bundle.getString(RegisterActivity.TYPE));
+//                beerListView.setBrewery(bundle.getString(RegisterActivity.BREWERY));
+//                beerListView.setAbv(bundle.getString(RegisterActivity.ABV));
+//                beerListView.setIbu(bundle.getString(RegisterActivity.IBU));
+//                beerListView.setNote(bundle.getString(RegisterActivity.NOTE));
+//                beerListView.setSpNote(bundle.getString(RegisterActivity.SP_NOTE));
+//                beerListView.setWouldBuyAgain(bundle.getBoolean(RegisterActivity.BUY_AGAIN));
+//                beerListView.setOrigin(bundle.getBoolean(RegisterActivity.ORIGIN));
+//
+//                positionSelected = -1;
+//
+//            }else{
+//
+//                beerList.add(Beer.bundleToBeerDTO(bundle));
+//            }
 
-            if(requestCode == RegisterActivity.UPDATE){
-
-                BeerDTO beerListView = beerList.get(positionSelected);
-                beerListView.setId(bundle.getInt(RegisterActivity.ID));
-                beerListView.setName(bundle.getString(RegisterActivity.NAME));
-                beerListView.setType(bundle.getString(RegisterActivity.TYPE));
-                beerListView.setBrewery(bundle.getString(RegisterActivity.BREWERY));
-                beerListView.setAbv(bundle.getString(RegisterActivity.ABV));
-                beerListView.setIbu(bundle.getString(RegisterActivity.IBU));
-                beerListView.setNote(bundle.getString(RegisterActivity.NOTE));
-                beerListView.setSpNote(bundle.getString(RegisterActivity.SP_NOTE));
-                beerListView.setWouldBuyAgain(bundle.getBoolean(RegisterActivity.BUY_AGAIN));
-                beerListView.setOrigin(bundle.getBoolean(RegisterActivity.ORIGIN));
-
-                positionSelected = -1;
-
-            }else{
-
-                Integer id = idGenerator();
-                bundle.putInt(RegisterActivity.ID, id);
-
-                beerList.add(BeerDTO.bundleToBeerDTO(bundle));
-            }
-
-            updateOrderList();
+            listFilling();
         }
     }
 
-
-    private int idGenerator(){
-        return beerList.size() + 1;
-    }
 
     private void readOrderPreference(){
 

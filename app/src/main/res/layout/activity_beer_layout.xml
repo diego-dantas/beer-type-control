@@ -76,37 +76,37 @@
             <TextView
                 android:id="@+id/textViewIdBeer"
                 android:layout_width="10dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1" />
 
             <TextView
                 android:id="@+id/textViewNameBeer"
                 android:layout_width="70dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1" />
 
             <TextView
                 android:id="@+id/textViewTypeBeer"
                 android:layout_width="70dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1" />
 
             <TextView
                 android:id="@+id/textViewAbvBeer"
                 android:layout_width="10dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1" />
 
             <TextView
                 android:id="@+id/textViewIbuBeer"
                 android:layout_width="10dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1" />
 
             <TextView
                 android:id="@+id/textViewNoteBeer"
                 android:layout_width="10dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1" />
 
         </android.widget.LinearLayout>
