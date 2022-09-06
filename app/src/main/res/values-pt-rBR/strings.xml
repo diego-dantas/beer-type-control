@@ -55,4 +55,6 @@
 
     <string name="newBeer">Nova Cerveja</string>
     <string name="updateBeer">Alterar Cerveja</string>
+    <string name="ordination">Ordenação</string>
+    <string name="direction">Direção</string>
 </resources>

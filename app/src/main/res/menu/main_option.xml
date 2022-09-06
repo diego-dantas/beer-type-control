@@ -9,15 +9,37 @@
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/menuItemAbout"
-        android:title="@string/about" />
-    <group
-        android:id="@+id/groupOrderList"
-        android:checkableBehavior="single">
-        <item
-            android:id="@+id/gMenuItemOrderId"
-            android:title="@string/id" />
-        <item
-            android:id="@+id/gMenuItemOrderName"
-            android:title="@string/name" />
-    </group>
+        android:title="@string/about" ></item>
+    <item
+        android:id="@+id/menuItemOrdination"
+        android:title="@string/ordination">
+        <menu>
+            <group
+                android:id="@+id/groupOrderList"
+                android:checkableBehavior="single">
+                <item
+                    android:id="@+id/gMenuItemOrderId"
+                    android:title="@string/id" />
+                <item
+                    android:id="@+id/gMenuItemOrderName"
+                    android:title="@string/name" />
+            </group>
+        </menu>
+    </item>
+    <item
+        android:id="@+id/menuItemDirection"
+        android:title="@string/direction" >
+        <menu >
+            <group
+                android:id="@+id/groupDirectionList"
+                android:checkableBehavior="single">
+                <item
+                    android:id="@+id/gMenuItemDirectionASC"
+                    android:title="@string/asc" />
+                <item
+                    android:id="@+id/gMenuItemDirectionDESC"
+                    android:title="@string/desc" />
+            </group>
+        </menu>
+    </item>
 </menu>

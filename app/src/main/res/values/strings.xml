@@ -54,4 +54,8 @@
 
     <string name="newBeer">"New Beer "</string>
     <string name="updateBeer">Update Beer</string>
+    <string name="ordination">Ordination</string>
+    <string name="direction">Direction</string>
+    <string name="asc" translatable="false">ASC</string>
+    <string name="desc" translatable="false">DESC</string>
 </resources>

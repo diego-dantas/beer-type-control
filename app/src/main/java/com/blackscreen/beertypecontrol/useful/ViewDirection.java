@@ -1,5 +1,5 @@
 package com.blackscreen.beertypecontrol.useful;
 
-public enum ViewOrder {
+public enum ViewDirection {
     ASC, DESC
 }

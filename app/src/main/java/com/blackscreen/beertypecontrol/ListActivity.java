@@ -1,19 +1,17 @@
 package com.blackscreen.beertypecontrol;
 
 import static com.blackscreen.beertypecontrol.useful.ViewTypeOrder.*;
+import static com.blackscreen.beertypecontrol.useful.ViewDirection.*;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ActionMode;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,26 +19,26 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.blackscreen.beertypecontrol.beer.BeerAdapter;
 import com.blackscreen.beertypecontrol.beer.BeerComparator;
 import com.blackscreen.beertypecontrol.beer.BeerDTO;
-import com.blackscreen.beertypecontrol.useful.ViewOrder;
+import com.blackscreen.beertypecontrol.useful.ViewDirection;
 import com.blackscreen.beertypecontrol.useful.ViewTypeOrder;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 public class ListActivity extends AppCompatActivity {
 
-    private static final String ARQUIVO = "com.blackscreen.beertypecontrol.ORDER_PREFERENCE";
+    private static final String FILE = "com.blackscreen.beertypecontrol.ORDER_PREFERENCE";
 
-    private static final String PREFERENCE = "PREFERENCE";
+    private static final String ORDER = "ORDER";
+    private static final String DIRECTION = "DIRECTION";
 
     private ViewTypeOrder viewTypeOrderOption = ID;
+    private ViewDirection viewDirectionOption = ASC;
 
     private ListView listViewBeer;
     private BeerAdapter beerAdapter;
@@ -155,9 +153,11 @@ public class ListActivity extends AppCompatActivity {
             case R.id.menuItemAdd:
                 RegisterActivity.newBeer(this);
                 break;
+
             case R.id.menuItemAbout:
                 AboutActivity.about(this);
                 break;
+
             case R.id.gMenuItemOrderId:
                 saveOrderPreference(ID);
                 return true;
@@ -165,9 +165,17 @@ public class ListActivity extends AppCompatActivity {
             case R.id.gMenuItemOrderName:
                 saveOrderPreference(NAME);
                 return true;
+
+            case R.id.gMenuItemDirectionASC:
+                saveDirectionPreference(ASC);
+                return true;
+
+            case R.id.gMenuItemDirectionDESC:
+                saveDirectionPreference(DESC);
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
-
         }
 
         return super.onOptionsItemSelected(item);
@@ -242,26 +250,44 @@ public class ListActivity extends AppCompatActivity {
 
     private void readOrderPreference(){
 
-        SharedPreferences shared = getSharedPreferences(ARQUIVO,
+        SharedPreferences shared = getSharedPreferences(FILE,
                 Context.MODE_PRIVATE);
 
-        viewTypeOrderOption = ViewTypeOrder.valueOf(shared.getString(PREFERENCE, viewTypeOrderOption.toString()));
+        viewTypeOrderOption = ViewTypeOrder.valueOf(shared.getString(ORDER, viewTypeOrderOption.toString()));
+
+        viewDirectionOption = ViewDirection.valueOf(shared.getString(DIRECTION, viewDirectionOption.toString()));
 
         updateOrderList();
     }
 
     private void saveOrderPreference(ViewTypeOrder viewTypeOrder){
 
-        SharedPreferences shared = getSharedPreferences(ARQUIVO,
+        SharedPreferences shared = getSharedPreferences(FILE,
                 Context.MODE_PRIVATE);
 
         SharedPreferences.Editor editor = shared.edit();
 
-        editor.putString(PREFERENCE, viewTypeOrder.toString());
+        editor.putString(ORDER, viewTypeOrder.toString());
 
         editor.commit();
 
         viewTypeOrderOption = viewTypeOrder;
+
+        updateOrderList();
+    }
+
+    private void saveDirectionPreference(ViewDirection viewDirection){
+
+        SharedPreferences shared = getSharedPreferences(FILE,
+                Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = shared.edit();
+
+        editor.putString(DIRECTION, viewDirection.toString());
+
+        editor.commit();
+
+        viewDirectionOption = viewDirection;
 
         updateOrderList();
     }
@@ -284,11 +310,24 @@ public class ListActivity extends AppCompatActivity {
         }
 
         item.setChecked(true);
+
+        switch(viewDirectionOption){
+            case ASC:
+                item = menu.findItem(R.id.gMenuItemDirectionASC);
+                break;
+            case DESC:
+                item = menu.findItem(R.id.gMenuItemDirectionDESC);
+                break;
+            default:
+                return false;
+        }
+
+        item.setChecked(true);
         return true;
     }
 
     private void updateOrderList(){
-        Collections.sort(beerList, new BeerComparator(ViewOrder.ASC, viewTypeOrderOption));
+        Collections.sort(beerList, new BeerComparator(viewDirectionOption, viewTypeOrderOption));
         beerAdapter.notifyDataSetChanged();
     }
 
