@@ -16,7 +16,6 @@ public class BeerAdapter extends BaseAdapter {
 
     private Context context;
     private List<Beer> beers;
-    private int colorMode;
 
     public BeerAdapter(Context context, List<Beer> beers){
         this.context = context;
@@ -31,8 +30,6 @@ public class BeerAdapter extends BaseAdapter {
         public TextView textViewIbu;
         public TextView textViewNote;
     }
-
-
 
     @Override
     public int getCount() {

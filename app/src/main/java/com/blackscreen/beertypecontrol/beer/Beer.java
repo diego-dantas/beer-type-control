@@ -1,11 +1,7 @@
 package com.blackscreen.beertypecontrol.beer;
 
-import android.os.Bundle;
-
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-
-import com.blackscreen.beertypecontrol.RegisterActivity;
 
 @Entity
 public class Beer {
@@ -116,18 +112,4 @@ public class Beer {
         this.wouldBuyAgain = wouldBuyAgain;
     }
 
-    public static Beer bundleToBeerDTO(Bundle bundle){
-
-        return new Beer(
-                bundle.getLong(RegisterActivity.ID),
-                bundle.getString(RegisterActivity.NAME),
-                bundle.getString(RegisterActivity.TYPE),
-                bundle.getString(RegisterActivity.BREWERY),
-                bundle.getString(RegisterActivity.ABV),
-                bundle.getString(RegisterActivity.IBU),
-                bundle.getString(RegisterActivity.NOTE),
-                bundle.getString(RegisterActivity.SP_NOTE),
-                bundle.getBoolean(RegisterActivity.BUY_AGAIN),
-                bundle.getBoolean(RegisterActivity.ORIGIN));
-    }
 }

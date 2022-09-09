@@ -103,17 +103,6 @@ public class ListActivity extends AppCompatActivity {
 
         listViewBeer = findViewById(R.id.listViewBeer);
 
-//        listViewBeer.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//
-//                positionSelected = i;
-//                updateRegister();
-//
-//            }
-//        });
-
         listViewBeer.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
         listViewBeer.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -202,7 +191,6 @@ public class ListActivity extends AppCompatActivity {
         listViewBeer.setAdapter(beerAdapter);
 
         readOrderPreference();
-
     }
 
     private void deleteRegister(){
@@ -249,31 +237,6 @@ public class ListActivity extends AppCompatActivity {
 
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
-
-//            Bundle bundle = data.getExtras();
-//
-//            if(requestCode == RegisterActivity.UPDATE){
-//
-//                Beer beerListView = beerList.get(positionSelected);
-//
-//                beerListView.setId(bundle.getLong(RegisterActivity.ID));
-//                beerListView.setName(bundle.getString(RegisterActivity.NAME));
-//                beerListView.setType(bundle.getString(RegisterActivity.TYPE));
-//                beerListView.setBrewery(bundle.getString(RegisterActivity.BREWERY));
-//                beerListView.setAbv(bundle.getString(RegisterActivity.ABV));
-//                beerListView.setIbu(bundle.getString(RegisterActivity.IBU));
-//                beerListView.setNote(bundle.getString(RegisterActivity.NOTE));
-//                beerListView.setSpNote(bundle.getString(RegisterActivity.SP_NOTE));
-//                beerListView.setWouldBuyAgain(bundle.getBoolean(RegisterActivity.BUY_AGAIN));
-//                beerListView.setOrigin(bundle.getBoolean(RegisterActivity.ORIGIN));
-//
-//                positionSelected = -1;
-//
-//            }else{
-//
-//                beerList.add(Beer.bundleToBeerDTO(bundle));
-//            }
-
             listFilling();
         }
     }

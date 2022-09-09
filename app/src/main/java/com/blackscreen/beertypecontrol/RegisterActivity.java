@@ -194,15 +194,15 @@ public class RegisterActivity extends AppCompatActivity {
             Intent intent = new Intent();
 
             intent.putExtra(ID, beer.getId());
-            intent.putExtra(NAME, beer.getName());
-            intent.putExtra(TYPE, beer.getType());
-            intent.putExtra(BREWERY, beer.getBrewery());
-            intent.putExtra(ABV, beer.getAbv());
-            intent.putExtra(IBU, beer.getIbu());
-            intent.putExtra(NOTE, beer.getNote());
-            intent.putExtra(SP_NOTE, beer.getSpNote());
-            intent.putExtra(BUY_AGAIN, beer.isWouldBuyAgain());
-            intent.putExtra(ORIGIN, beer.isOrigin());
+//            intent.putExtra(NAME, beer.getName());
+//            intent.putExtra(TYPE, beer.getType());
+//            intent.putExtra(BREWERY, beer.getBrewery());
+//            intent.putExtra(ABV, beer.getAbv());
+//            intent.putExtra(IBU, beer.getIbu());
+//            intent.putExtra(NOTE, beer.getNote());
+//            intent.putExtra(SP_NOTE, beer.getSpNote());
+//            intent.putExtra(BUY_AGAIN, beer.isWouldBuyAgain());
+//            intent.putExtra(ORIGIN, beer.isOrigin());
 
             setResult(Activity.RESULT_OK, intent);
 
@@ -243,10 +243,13 @@ public class RegisterActivity extends AppCompatActivity {
             return null;
         }
 
-        String spNote   = validateSpinner();
         Boolean wouldBuyAgain = validateRadioButton();
+        if(Objects.isNull(wouldBuyAgain)){
+            return null;
+        }
 
-        if(Objects.isNull(wouldBuyAgain) || Objects.isNull(spNote)){
+        String spNote   = validateSpinner();
+        if(Objects.isNull(spNote)){
             return null;
         }
 
@@ -264,14 +267,8 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
 
-    public void showToastEditText(Integer errorMsg, EditText editText){
-        Toast.makeText(this, errorMsg, Toast.LENGTH_LONG).show();
-        editText.requestFocus();
-    }
-
     private void msgValidateField(Integer errorMsg, EditText editText){
         CustomAlert.errorWarning(this, errorMsg);
-
         editText.requestFocus();
     }
 
